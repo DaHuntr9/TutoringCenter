@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
-public class signupController extends JSONObjectFactory{
+public class signinController extends JSONObjectFactory{
 
   @FXML TextField passwordtxt;
 
@@ -18,11 +18,14 @@ public class signupController extends JSONObjectFactory{
   @FXML
   private void button1Pressed(ActionEvent event) throws IOException {
     JSONObjectFactory JSONFile = new JSONObjectFactory();
-    if ( usernametxt.getText().isEmpty() || passwordtxt.getText().isEmpty()  ) {
-      errortext.setText("The one of the submission fields are empty");
+    if (JSONFile.LoginValidation(usernametxt.getText(), passwordtxt.getText()) == Boolean.TRUE) {
+      errortext.setText("Success");
+      //this is where the code goes to change the page to a home page
     }
     else{
-      JSONFile.createNewUser(usernametxt.getText(), passwordtxt.getText());
+      String error = "Failed login";
+      errortext.setText(error);
     }
+
   }
 }
