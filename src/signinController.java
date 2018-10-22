@@ -20,12 +20,14 @@ public class signinController extends JSONObjectFactory{
     JSONObjectFactory JSONFile = new JSONObjectFactory();
     if (JSONFile.LoginValidation(usernametxt.getText(), passwordtxt.getText()) == Boolean.TRUE) {
       errortext.setText("Success");
+      JSONFile.createAssignment("2.1","Homework",10,8,"needs improvment");
       //this is where the code goes to change the page to a home page
     }
     else{
       String error = "Failed login";
       errortext.setText(error);
     }
+
 
   }
 }

@@ -12,12 +12,13 @@ import org.json.simple.parser.ParseException;
 public class JSONObjectFactory {
   //this stores the parsed data from the JSON file
   JSONArray AccountsIN;
+  static int UserNumber=0;
+
   //Constructor
   JSONObjectFactory(){
     //scanner and file name is constant across all read and write classes
     Scanner scanner = new Scanner(System.in);
     File file = new File("JSONDATA.txt");
-
 
     //reading to the file
 
@@ -66,18 +67,111 @@ public class JSONObjectFactory {
       System.out.println(e.toString());
     }
   }
-  
+  /**
+  //adds new user to JSON file
+  void createNewUser(String NewUsername, String NewPassword) {
+    //this stores the individual accounts
+    JSONArray NewUserAccount = new JSONArray();
+    //this is the object that will store the user credentials
+    JSONObject userCredentials = new JSONObject();
+    //puts username into the user credentials object
+    userCredentials.put("Username", NewUsername);
+    userCredentials.put("Password", NewPassword);
+    //adds the user Credentials to the user accounts
+    NewUserAccount.add(userCredentials);
+    //adds the account to the JSON array
+    AccountsIN.add(NewUserAccount);
+    //sets the account number so that the createUserInformation function appends to the correct array value
+    UserNumber = AccountsIN.toArray().length-1;
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
+
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }
+ */
+  //checks the username and password of all accounts to check if the combination is correct.
+  Boolean LoginValidation(String enteredUsername,String enteredPassword){
+    Boolean LoginCredentials = Boolean.FALSE;
+    //this parses the users account from the constructor
+    JSONArray userAccountsIN;
+    for(int i=0;i<=AccountsIN.toArray().length-1;i++){
+      userAccountsIN = (JSONArray) AccountsIN.get(i);
+      //zero is the code for the user credential storage
+      JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+      String UsernameIn = (String) userCredentialsIn.get("Username");
+      String PasswordIn = (String) userCredentialsIn.get("Password");
+      if(enteredUsername.equals(UsernameIn) && enteredPassword.equals(PasswordIn) ){
+        LoginCredentials = Boolean.TRUE;
+        UserNumber=i;
+        break;
+      }
+    }
+    return LoginCredentials;
+  }
+
+  //this appends the User's Information to the UserAccount
+  void createUserInformation(String NewUsername,String NewPassword,String FirstName,String LastName,String Email, String AccountType){
+    //this stores the individual accounts
+    JSONArray NewUserAccount = new JSONArray();
+    //this is the object that will store the user credentials
+    JSONObject UserInformation = new JSONObject();
+    //puts username into the user credentials object
+    UserInformation.put("Username", NewUsername);
+    UserInformation.put("Password", NewPassword);
+    UserInformation.put("FirstName", FirstName);
+    UserInformation.put("LastName", LastName);
+    UserInformation.put("Email", Email);
+    UserInformation.put("AccountType", AccountType);
+
+    //adds the user Credentials to the user accounts
+    NewUserAccount.add(UserInformation);
+    //creates and adds assignmentsArray, appointmentArray, and reviewsLinkArray
+    JSONArray assignmentsArray = new JSONArray();
+    NewUserAccount.add(assignmentsArray);
+    JSONArray appointmentArray = new JSONArray();
+    NewUserAccount.add(appointmentArray);
+    JSONArray reviewsLinkArray = new JSONArray();
+    NewUserAccount.add(reviewsLinkArray);
+
+    //adds the account to the JSON array
+    AccountsIN.add(NewUserAccount);
+
+
+    //sets the account number so that the createUserInformation function appends to the correct array value
+    UserNumber = AccountsIN.toArray().length-1;
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
+
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }
+
   //adds new user to JSON file
   void deleteUser(String Username, String Password) {
     //this is too check if the login credentials are valid
     // so that it is the user deleting the account
 
     //this parses the users account from the constructor
-    JSONArray userAccountIN = (JSONArray) AccountsIN.get(0);
+    JSONArray userAccountIN;
     //
-    System.out.println(userAccountIN.size());
+    //System.out.println(userAccountIN.size());
 
-    for(int usernumber=0;usernumber<=AccountsIN.size();usernumber++){
+    for(int usernumber=0;usernumber<=AccountsIN.toArray().length-1;usernumber++){
       userAccountIN = (JSONArray) AccountsIN.get(usernumber);
       //zero is the code for the user credential storage
       JSONObject userCredentialsIn = (JSONObject) userAccountIN.get(0);
@@ -105,53 +199,6 @@ public class JSONObjectFactory {
     System.out.println("File updated successfully");
   }
 
-  //adds new user to JSON file
-  void createNewUser(String NewUsername, String NewPassword) {
-    //this stores the individual accounts
-    JSONArray NewUserAccount = new JSONArray();
-    //this is the object that will store the user credentials
-    JSONObject userCredentials = new JSONObject();
-    //puts username into the user credentials object
-    userCredentials.put("Username", NewUsername);
-    userCredentials.put("Password", NewPassword);
-    //adds the user Credentials to the user accounts
-    NewUserAccount.add(userCredentials);
-    //adds the account to the JSON array
-    AccountsIN.add(NewUserAccount);
-    //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
-  }
-
-  //checks the username and password of all accounts to check if the combination is correct.
-  Boolean LoginValidation(String enteredUsername,String enteredPassword){
-    Boolean LoginCredentials = Boolean.FALSE;
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(0);
-    //
-    for(int i=0;i<=AccountsIN.size();i++){
-      userAccountsIN = (JSONArray) AccountsIN.get(i);
-      //zero is the code for the user credential storage
-      JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-      String UsernameIn = (String) userCredentialsIn.get("Username");
-      String PasswordIn = (String) userCredentialsIn.get("Password");
-      if(enteredUsername.equals(UsernameIn) && enteredPassword.equals(PasswordIn) ){
-        LoginCredentials = Boolean.TRUE;
-        break;
-      }
-    }
-    return LoginCredentials;
-  }
-
   //returns the Username of user given their account number
   String returnUsername(int UserNumber){
     //this parses the users account from the constructor
@@ -171,4 +218,102 @@ public class JSONObjectFactory {
     String PasswordIn = (String) userCredentialsIn.get("Password");
     return PasswordIn;
   }
+
+  String returnFirstName(int UserNumber){
+    //this parses the users account from the constructor
+    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+
+    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    String FirstName = (String) userCredentialsIn.get("FirstName");
+    return FirstName;
+  }
+
+  String returnLastName(int UserNumber){
+    //this parses the users account from the constructor
+    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+
+    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    String LastName = (String) userCredentialsIn.get("LastName");
+    return LastName;
+  }
+
+  String returnEmail(int UserNumber){
+    //this parses the users account from the constructor
+    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+
+    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    String Email = (String) userCredentialsIn.get("Email");
+    return Email;
+  }
+
+  String returnRole(int UserNumber){
+    //this parses the users account from the constructor
+    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+
+    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    String Role = (String) userCredentialsIn.get("Role");
+    return Role;
+  }
+
+  void createAssignment(String AssignmentName, String AssigmentType, int MaxPoints, int PointsRecived,String Comments){
+    //this parses the users account from the constructor
+    JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(0);
+    //zero is the code for the user credential storage
+    JSONArray AssignmentArrayInstance = (JSONArray) UserAccountsIN.get(1);
+    //this is the new object that will be added to the array
+    JSONObject AssignmentData = new JSONObject();
+    AssignmentData.put("AssignmentName", AssignmentName);
+    AssignmentData.put("AssigmentType", AssigmentType);
+    AssignmentData.put("MaxPoints", MaxPoints);
+    AssignmentData.put("PointsRecived", PointsRecived);
+    AssignmentData.put("Comments", Comments);
+    AssignmentArrayInstance.add(AssignmentData);
+
+
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
+
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }
+
+
+
+
+
+  //this appends the AssignmentArray to the UserAccount
+  /*void createAssignmentsArray(){
+    //this stores the individual accounts
+    JSONArray NewUserAccount = new JSONArray();
+    //this is the object that will store the user credentials
+    JSONObject UserInformation = new JSONObject();
+    //puts username into the user credentials object
+    UserInformation.put("FirstName", FirstName);
+    UserInformation.put("LastName", LastName);
+    UserInformation.put("Email", Email);
+    UserInformation.put("AccountType", AccountType);
+    //adds the user Credentials to the user accounts
+    NewUserAccount.add(UserInformation);
+    //adds the account to the JSON array
+    AccountsIN.add(NewUserAccount);
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
+
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }*/
 }
