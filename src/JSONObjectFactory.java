@@ -3,6 +3,7 @@ package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Scanner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -257,7 +258,7 @@ public class JSONObjectFactory {
 
   void createAssignment(String AssignmentName, String AssigmentType, int MaxPoints, int PointsRecived,String Comments){
     //this parses the users account from the constructor
-    JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(0);
+    JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
     //zero is the code for the user credential storage
     JSONArray AssignmentArrayInstance = (JSONArray) UserAccountsIN.get(1);
     //this is the new object that will be added to the array
@@ -284,9 +285,61 @@ public class JSONObjectFactory {
     System.out.println("File updated successfully");
   }
 
+  void createAppointment(String Subject, String TutorName, String AppointmentTime,String Location){
+    //this parses the users account from the constructor
+    JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+    //zero is the code for the user credential storage
+    JSONArray AppointmentArrayInstance = (JSONArray) UserAccountsIN.get(2);
+    //this is the new object that will be added to the array
+    JSONObject AppointmentData = new JSONObject();
+    AppointmentData.put("Subject", Subject);
+    AppointmentData.put("TutorName", TutorName);
+    AppointmentData.put("AppointmentTime", AppointmentTime);
+    AppointmentData.put("Location", Location);
+    AppointmentArrayInstance.add(AppointmentData);
 
 
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
 
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }
+
+  /**
+  void createReviewLink(String ReviewNumber){
+    //this parses the users account from the constructor
+    JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+    //zero is the code for the user credential storage
+    JSONArray AssignmentArrayInstance = (JSONArray) UserAccountsIN.get(3);
+    //this is the new object that will be added to the array
+    JSONObject AssignmentData = new JSONObject();
+    AssignmentArrayInstance.add();
+
+    //hey this is the part where you need to figure out how to store multiple review numbers such as an array
+    //if thats the case then you need to figure out if you want them as separate objects or as
+
+    //print the JSON Structure
+    System.out.println(AccountsIN.toJSONString());
+
+    //now we will create a file and write the json structure to it.
+    //makes a file object and passes it as a parameter as a printer
+    File file = new File("JSONDATA.txt");
+    try (PrintWriter writer = new PrintWriter(file);) {
+      writer.print(AccountsIN.toJSONString());
+    } catch (FileNotFoundException ex) {
+      System.out.println(ex.toString());
+    }
+    System.out.println("File updated successfully");
+  }
+  */
 
   //this appends the AssignmentArray to the UserAccount
   /*void createAssignmentsArray(){

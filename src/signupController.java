@@ -33,8 +33,6 @@ public class signupController extends JSONObjectFactory{
       errortxt.setText("The one of the submission fields are empty");
     }
     else{
-      //JSONFile.createNewUser(usernametxt.getText(), passwordtxt.getText());
-      //check the last parameter to see if it gets the value from the drop down
       JSONFile.createUserInformation(usernametxt.getText(),passwordtxt.getText(),firstnametxt.getText(),lastnametxt.getText(),emailtxt.getText(),roledropdown.getPromptText());
     }
   }
