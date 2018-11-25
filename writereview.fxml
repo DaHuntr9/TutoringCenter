@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+  prefHeight="400.0"
+  prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="src.writereviewController">
+  <children>
+    <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="34.0" prefWidth="600.0">
+      <tabs>
+        <Tab text="Dashboard" fx:id="dashboard" onSelectionChanged="#dashboardChosen">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+        <Tab text="Calendar" fx:id="grades" onSelectionChanged="#calendarChosen">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+        <Tab text="Quizzes" fx:id="quizzes" onSelectionChanged="#quizChosen">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+        <Tab text="Grades">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+        <Tab text="Schedule" fx:id="schedule" onSelectionChanged="#scheduleChosen">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+        <Tab text="Settings" fx:id="settings" onSelectionChanged="#settingsChosen">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+          </content>
+        </Tab>
+      </tabs>
+    </JFXTabPane>
+    <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0"
+      text="Copyright © 2018 Gutterboyz and Son LLC"
+      textAlignment="CENTER"/>
+    <JFXTextArea editable="false" layoutX="130.0" layoutY="176.0" prefHeight="109.0"
+      prefWidth="375.0"
+      text="This is sample text in order to demonstrate the wrapping feature of a text area."
+      wrapText="true"/>
+    <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="315.0" prefHeight="37.0"
+      prefWidth="69.0"
+      style="-fx-background-color: #ffffff;" text="Submit"/>
+    <JFXComboBox layoutX="130.0" layoutY="70.0" prefHeight="25.0" prefWidth="258.0"
+      promptText="Select Tutor"/>
+    <JFXComboBox layoutX="130.0" layoutY="120.0" prefHeight="25.0" prefWidth="258.0"
+      promptText="Select Tags"/>
+  </children>
+</AnchorPane>
