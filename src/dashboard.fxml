@@ -4,23 +4,20 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<JFXTabPane fx:id="tabpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="34.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.dashboardController">
+<JFXTabPane fx:id="tabpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" stylesheets="@dashboardstyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.dashboardController">
   <tabs>
     <Tab fx:id="dashboard" text="Dashboard">
       <content>
@@ -28,14 +25,14 @@
           <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
           <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="290.0" onAction="#goToProfile" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Profile" />
           <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="150.0" onAction="#goToGradesAttendance" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Grades and Attendance" />
-          <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="220.0" onAction="#goToTutorReviews" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Tutor Reviews" />
-          <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="80.0" onAction="#goToScheduleTutoringCenter" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Schedule Tutoring Center" />
+          <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="220.0" onAction="#goToReviewTutorsDashboard" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Tutor Reviews" />
+          <JFXButton fx:id="scheduleTutoring" buttonType="RAISED" layoutX="50.0" layoutY="80.0" onAction="#goToScheduleTutoringCenter" prefHeight="37.0" prefWidth="152.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Schedule Tutoring" />
           <JFXBadge fx:id="class1" layoutX="346.0" layoutY="70.0" onMouseEntered="#class1Hover" onMouseExited="#class1Exit" prefHeight="57.0" prefWidth="152.0" style="-fx-background-color: #ffccbb;">
             <effect>
               <DropShadow blurType="GAUSSIAN" color="#0000005c" />
             </effect>
             <children>
-              <Label alignment="CENTER" text="Class 1" />
+              <Label alignment="CENTER" text="Grade Average" />
             </children>
           </JFXBadge>
           <JFXBadge fx:id="class2" layoutX="346.0" layoutY="175.0" onMouseEntered="#class2Hover" onMouseExited="#class2Exit" prefHeight="57.0" prefWidth="152.0" style="-fx-background-color: #6eb5c0;">
@@ -43,7 +40,7 @@
               <DropShadow blurType="GAUSSIAN" color="#0000005c" />
             </effect>
             <children>
-              <Label text="Class 2" />
+              <Label text="Attendence Average" />
             </children>
           </JFXBadge>
           <JFXBadge fx:id="class3" layoutX="346.0" layoutY="280.0" onMouseEntered="#class3Hover" onMouseExited="#class3Exit" prefHeight="57.0" prefWidth="152.0" style="-fx-background-color: #006c84;">
@@ -54,440 +51,148 @@
               <Label text="Class 3" />
             </children>
           </JFXBadge>
-          <Label fx:id="user1" text="USERNAME" />
         </AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="calendar" text="Calendar">
+    <Tab fx:id="calendar" text="Appointments">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
-          <Label alignment="CENTER" layoutX="258.0" layoutY="42.0" text="October 2018">
-            <font>
-              <Font size="14.0" />
-            </font>
-          </Label>
-          <JFXBadge layoutX="23.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="30" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="103.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="1" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="183.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="2" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="263.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="3" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="343.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="4" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="423.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="5" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="503.0" layoutY="90.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="6" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="23.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="7" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="103.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="8" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="183.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="9" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="263.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="10" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="343.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="11" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="423.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="12" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="503.0" layoutY="150.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="13" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="23.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="14" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="103.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="15" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="183.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="16" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="263.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="17" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="343.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="18" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="423.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="19" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="503.0" layoutY="210.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="20" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="23.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="21" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="103.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="22" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="183.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="23" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="263.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="24" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="343.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="25" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="423.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="26" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="503.0" layoutY="270.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="27" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="23.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="28" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="103.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="29" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="183.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="30" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="263.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="31" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="343.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="1" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="423.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="2" />
-            </children>
-          </JFXBadge>
-          <JFXBadge layoutX="503.0" layoutY="330.0" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #ffccbb;">
-            <effect>
-              <DropShadow blurType="GAUSSIAN" color="#0000005c" />
-            </effect>
-            <children>
-              <Label alignment="CENTER" prefHeight="17.0" prefWidth="56.0" text="3" />
-            </children>
-          </JFXBadge>
-          <JFXTextField alignment="CENTER" editable="false" layoutX="23.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Sunday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="103.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Monday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="183.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Tuesday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="263.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Wednesday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="343.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Thursday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="423.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Friday" />
-          <JFXTextField alignment="CENTER" editable="false" layoutX="503.0" layoutY="58.0" prefHeight="24.0" prefWidth="75.0" text="Saturday" />
-          <Circle fill="#bf8484" layoutX="88.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="168.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="248.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="328.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="408.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="488.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="568.0" layoutY="100.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="88.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="168.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="248.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="328.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="408.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="488.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="568.0" layoutY="160.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="88.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="168.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="248.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="328.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="408.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="488.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="568.0" layoutY="220.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="88.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Label layoutX="85.0" layoutY="271.0" text="1" />
-          <Circle fill="#bf8484" layoutX="88.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Label layoutX="85.0" layoutY="331.0" text="1" />
-          <Circle fill="#bf8484" layoutX="168.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="248.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="328.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="408.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="488.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="568.0" layoutY="280.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="168.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="248.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="328.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="408.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="488.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Circle fill="#bf8484" layoutX="568.0" layoutY="340.0" radius="8.0" stroke="#bf8484" strokeType="INSIDE" />
-          <Label layoutX="85.0" layoutY="211.0" text="1" />
-          <Label layoutX="85.0" layoutY="151.0" text="1" />
-          <Label layoutX="82.0" layoutY="91.0" text="9+" />
-          <Label layoutX="165.0" layoutY="331.0" text="1" />
-          <Label layoutX="245.0" layoutY="331.0" text="1" />
-          <Label layoutX="325.0" layoutY="331.0" text="1" />
-          <Label layoutX="405.0" layoutY="331.0" text="1" />
-          <Label layoutX="485.0" layoutY="331.0" text="1" />
-          <Label layoutX="565.0" layoutY="331.0" text="1" />
-          <Label layoutX="165.0" layoutY="271.0" text="1" />
-          <Label layoutX="245.0" layoutY="271.0" text="1" />
-          <Label layoutX="325.0" layoutY="271.0" text="1" />
-          <Label layoutX="405.0" layoutY="271.0" text="1" />
-          <Label layoutX="485.0" layoutY="271.0" text="1" />
-          <Label layoutX="565.0" layoutY="271.0" text="1" />
-          <Label layoutX="165.0" layoutY="211.0" text="1" />
-          <Label layoutX="245.0" layoutY="211.0" text="1" />
-          <Label layoutX="325.0" layoutY="211.0" text="1" />
-          <Label layoutX="405.0" layoutY="211.0" text="1" />
-          <Label layoutX="485.0" layoutY="211.0" text="1" />
-          <Label layoutX="565.0" layoutY="211.0" text="1" />
-          <Label layoutX="165.0" layoutY="151.0" text="1" />
-          <Label layoutX="245.0" layoutY="151.0" text="1" />
-          <Label layoutX="325.0" layoutY="151.0" text="1" />
-          <Label layoutX="405.0" layoutY="151.0" text="1" />
-          <Label layoutX="485.0" layoutY="151.0" text="1" />
-          <Label layoutX="565.0" layoutY="151.0" text="1" />
-          <Label layoutX="165.0" layoutY="91.0" text="1" />
-          <Label layoutX="245.0" layoutY="91.0" text="1" />
-          <Label layoutX="325.0" layoutY="91.0" text="1" />
-          <Label layoutX="405.0" layoutY="91.0" text="1" />
-          <Label layoutX="485.0" layoutY="91.0" text="1" />
-          <Label layoutX="565.0" layoutY="91.0" text="1" />
-          <Label fx:id="user2" text="USERNAME" />
+          <JFXButton fx:id="updateAssignments" alignment="CENTER" buttonType="RAISED" layoutX="46.0" layoutY="9.0" onAction="#updateAssignments" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffccbb;" text="Update" />
+          <JFXTreeTableView fx:id="table" layoutX="46.0" layoutY="48.0" prefHeight="310.0" prefWidth="509.0" />
+          <JFXComboBox fx:id="appointmentComboBox" labelFloat="true" layoutX="391.0" layoutY="12.0" prefHeight="25.0" prefWidth="164.0" promptText="Appointment Number" />
+          <JFXButton fx:id="checkInButton" alignment="CENTER" buttonType="RAISED" layoutX="161.0" layoutY="9.0" onAction="#checkIn" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffccbb;" text="Check-In" />
         </AnchorPane>
       </content>
     </Tab>
-    <fx:define>
-      <ToggleGroup fx:id="toggleGroupQuiz" />
-    </fx:define>
     <Tab fx:id="quizzes" text="Quizzes">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-          <JFXRadioButton layoutX="130.0" layoutY="160.0" text="Answer #1">
-            <toggleGroup>
-              <ToggleGroup fx:id="toggleGroupQuiz" />
-            </toggleGroup></JFXRadioButton>
-          <JFXRadioButton layoutX="130.0" layoutY="190.0" text="Answer #2" toggleGroup="$toggleGroupQuiz" />
-          <JFXRadioButton layoutX="130.0" layoutY="250.0" text="Answer #4" toggleGroup="$toggleGroupQuiz" />
-          <JFXRadioButton layoutX="130.0" layoutY="220.0" text="Answer #3" toggleGroup="$toggleGroupQuiz" />
-          <JFXListView layoutX="14.0" layoutY="90.0" prefHeight="200.0" prefWidth="93.0" />
-          <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
-          <JFXTextArea editable="false" layoutX="130.0" layoutY="90.0" prefHeight="55.0" prefWidth="375.0" text="This is sample text in order to demonstrate the wrapping feature of a text area." />
-          <JFXButton buttonType="RAISED" layoutX="130.0" layoutY="311.0" onAction="#goToQuizBack" prefHeight="37.0" prefWidth="69.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Back" />
-          <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="311.0" onAction="#goToQuizNext" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffffff;" text="Next" />
-          <Label fx:id="user3" text="USERNAME" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+          <children>
+            <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
+            <JFXButton fx:id="class1quiz" alignment="CENTER" buttonType="RAISED" layoutX="129.0" layoutY="96.0" onAction="#goToClass1Quiz" prefHeight="57.0" prefWidth="342.0" style="-fx-background-color: #ffccbb;" text="Class 1 Quiz">
+              <effect>
+                <DropShadow blurType="GAUSSIAN" color="#0000005c" />
+              </effect>
+            </JFXButton>
+            <JFXButton fx:id="class2quiz" alignment="CENTER" buttonType="RAISED" layoutX="129.0" layoutY="178.0" onAction="#goToClass2Quiz" prefHeight="57.0" prefWidth="342.0" style="-fx-background-color: #6eb5c0;" text="Class 2 Quiz">
+              <effect>
+                <DropShadow blurType="GAUSSIAN" color="#0000005c" />
+              </effect>
+            </JFXButton>
+            <JFXButton fx:id="class3quiz" alignment="CENTER" buttonType="RAISED" layoutX="129.0" layoutY="263.0" onAction="#goToClass3Quiz" prefHeight="57.0" prefWidth="342.0" style="-fx-background-color: #006c84;" text="Class 3 Quiz">
+              <effect>
+                <DropShadow blurType="GAUSSIAN" color="#0000005c" />
+              </effect>
+            </JFXButton>
+                  <Label fx:id="QuizErrorA" alignment="CENTER" layoutY="34.0" prefHeight="24.0" prefWidth="600.0" text="No quizes have been assigned to you. Ask a Tutor for further assitance." textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+          </children>
         </AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="grades" text="Grades">
+    <Tab fx:id="quizzesTutor" text="Quizzes">
+      <content>
+        <AnchorPane fx:id="tutorQuizCreation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+          <children>
+            <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" visible="true" />
+            <Label fx:id="quizError" alignment="CENTER" layoutX="-4.0" layoutY="355.0" prefHeight="24.0" prefWidth="600.0" text="" textAlignment="CENTER" textFill="crimson" visible="true" />
+            <JFXTextArea fx:id="QuizQuestion" editable="true" labelFloat="true" layoutX="109.0" layoutY="29.0" prefHeight="32.0" prefWidth="375.0" promptText="Enter Question 1" text="" visible="false" />
+            <JFXButton fx:id="goToLastQuestionTutor" buttonType="RAISED" layoutX="107.0" layoutY="317.0" onAction="#goToLastQuestion" prefHeight="37.0" prefWidth="69.0" ripplerFill="#167cd0" style="-fx-background-color: #ffccbb;" text="Back" visible="false" />
+            <JFXButton fx:id="nextQuestionButton" buttonType="RAISED" layoutX="413.0" layoutY="317.0" onAction="#goToNextQuestion" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Next" visible="false" />
+            <Hyperlink fx:id="submitHyperlink" cacheShape="false" layoutX="439.0" layoutY="355.0" onAction="#goToQuizSubmission" text="Submit" visible="false" />
+            <JFXTextArea fx:id="QuizQuestion1" editable="true" labelFloat="true" layoutX="109.0" layoutY="84.0" prefHeight="32.0" prefWidth="375.0" promptText="Enter Answer #1" text="" visible="false" />
+            <JFXTextArea fx:id="QuizQuestion2" editable="true" labelFloat="true" layoutX="109.0" layoutY="139.0" prefHeight="32.0" prefWidth="375.0" promptText="Enter Answer #2" text="" visible="false" />
+            <JFXTextArea fx:id="QuizQuestion3" editable="true" labelFloat="true" layoutX="109.0" layoutY="249.0" prefHeight="32.0" prefWidth="375.0" promptText="Enter Answer #4" text="" visible="false" />
+            <JFXTextArea fx:id="QuizQuestion4" editable="true" labelFloat="true" layoutX="109.0" layoutY="194.0" prefHeight="32.0" prefWidth="375.0" promptText="Enter Answer #3" text="" visible="false" />
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <JFXButton fx:id="createQuizButton" alignment="CENTER" buttonType="RAISED" layoutX="129.0" layoutY="125.0" onAction="#goToQuizCreation" prefHeight="120.0" prefWidth="342.0" style="-fx-background-color: #ffccbb;" text="Create a Quiz!" visible="false">
+              <effect>
+                <DropShadow blurType="GAUSSIAN" color="#0000005c" />
+              </effect>
+            </JFXButton>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <JFXButton fx:id="completeQuizCreation" buttonType="RAISED" layoutX="367.0" layoutY="266.0" onAction="#completeQuizCreation" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Submit" visible="false" />
+            <JFXButton fx:id="goToDashboard" buttonType="RAISED" layoutX="165.0" layoutY="266.0" onAction="#goToDashboard" prefHeight="37.0" prefWidth="76.0" style="-fx-background-color: #ffccbb;" text="Dashboard" visible="false" />
+            <JFXComboBox fx:id="selectedstudent" labelFloat="true" layoutX="165.0" layoutY="149.0" prefHeight="58.0" prefWidth="271.0" promptText="Select Student" visible="false" />
+            <JFXTextArea fx:id="submitQuizCreationInstructions" editable="false" layoutX="165.0" layoutY="93.0" prefHeight="47.0" prefWidth="271.0" text="Select which student you would like to submit this quiz for." visible="false" />
+          </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="reviewTutors" text="Reviews">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
-          <JFXTextArea editable="false" layoutX="130.0" layoutY="176.0" prefHeight="109.0" prefWidth="375.0" text="This is sample text in order to demonstrate the wrapping feature of a text area." wrapText="true" />
-          <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="315.0" onAction="#submitTutorReview" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffffff;" text="Submit" />
-          <JFXComboBox layoutX="130.0" layoutY="70.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Tutor" />
-          <JFXComboBox layoutX="130.0" layoutY="120.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Tags" />
-          <Label fx:id="user4" text="USERNAME" />
+          <JFXTextArea fx:id="reviewContent" editable="true" labelFloat="true" layoutX="130.0" layoutY="176.0" prefHeight="109.0" prefWidth="375.0" promptText="Enter your Review Here!" text="" wrapText="true" />
+          <JFXButton fx:id="reviewSubmitButton" buttonType="RAISED" layoutX="436.0" layoutY="315.0" onAction="#submitTutorReview" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Submit" />
+          <JFXButton fx:id="reviewRedirectButton" buttonType="RAISED" layoutX="130.0" layoutY="315.0" onAction="#goToTutorReviews" prefHeight="37.0" prefWidth="123.0" style="-fx-background-color: #ffccbb;" text="Tutor Reviews" />
+          <JFXComboBox fx:id="roleDropDownOne" labelFloat="true" layoutX="130.0" layoutY="70.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Tutor" />
+          <JFXComboBox fx:id="roleDropDownTwo" labelFloat="true" layoutX="130.0" layoutY="120.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Reviews" />
+               <Label fx:id="ErrorReview" alignment="CENTER" layoutY="290.0" prefHeight="24.0" prefWidth="600.0" text="Please check the Submission Fields" textAlignment="CENTER" textFill="crimson" visible="false" />
         </AnchorPane>
       </content>
     </Tab>
     <Tab fx:id="schedule" text="Schedule">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
-          <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="330.0" onAction="#scheduleTutor" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffffff;" text="Submit" />
-          <JFXDatePicker layoutX="182.0" layoutY="240.0" prefHeight="25.0" prefWidth="258.0" promptText="Choose Date" />
-          <JFXComboBox layoutX="182.0" layoutY="110.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Tutor" />
-          <JFXComboBox layoutX="182.0" layoutY="60.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" />
-          <JFXTextArea layoutX="182.0" layoutY="160.0" prefHeight="61.0" prefWidth="258.0" promptText="Describe what you would like to study." wrapText="true" />
-          <JFXTimePicker layoutX="182.0" layoutY="280.0" prefHeight="25.0" prefWidth="258.0" promptText="Choose Time" />
-          <Label fx:id="user5" text="USERNAME" />
+          <Label fx:id="ErrorSchedule" alignment="CENTER" layoutX="-32.0" layoutY="337.0" prefHeight="24.0" prefWidth="600.0" text="Please Fill All Text Fields" textAlignment="CENTER" textFill="crimson" visible="false" />
+          <JFXTextArea fx:id="Location" labelFloat="true" layoutX="182.0" layoutY="280.0" prefHeight="25.0" prefWidth="258.0" promptText="Enter location" wrapText="true" />
+          <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="330.0" onAction="#scheduleTutor" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Submit" />
+          <JFXDatePicker fx:id="DatePicked" defaultColor="#006c84" layoutX="182.0" layoutY="194.0" prefHeight="25.0" prefWidth="258.0" promptText="Choose Date" />
+          <JFXComboBox fx:id="TutorPicked" labelFloat="true" layoutX="182.0" layoutY="64.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Tutor" />
+          <JFXComboBox fx:id="SubjectPicked" labelFloat="true" layoutX="182.0" layoutY="14.0" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" />
+          <JFXTextArea fx:id="Comment" labelFloat="true" layoutX="182.0" layoutY="114.0" prefHeight="61.0" prefWidth="258.0" promptText="Describe what you would like to study." wrapText="true" />
+          <JFXTimePicker fx:id="TimePicked" defaultColor="#006c84" layoutX="182.0" layoutY="234.0" prefHeight="25.0" prefWidth="258.0" promptText="Choose Time" />
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="scheduleTutor" text="Schedule">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <Label alignment="CENTER" layoutY="378.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
+          <JFXButton fx:id="updateAssignmentsTutor" alignment="CENTER" buttonType="RAISED" layoutX="46.0" layoutY="10.0" onAction="#updateAssignmentsTutor" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #ffccbb;" text="Update" />
+          <JFXTreeTableView fx:id="tableTutor" layoutX="46.0" layoutY="48.0" prefHeight="310.0" prefWidth="509.0" />
+          <JFXComboBox fx:id="AssignmentNumberDropDown" labelFloat="true" layoutX="391.0" layoutY="13.0" prefHeight="25.0" prefWidth="164.0" promptText="Assignment Number" visible="false" />
+          <JFXButton fx:id="createAssignment" alignment="CENTER" buttonType="RAISED" layoutX="121.0" layoutY="10.0" onAction="#createAssignment" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #ffccbb;" text="Create Assignment" />
+          <!--<JFXButton fx:id="removeAssignment" alignment="CENTER" buttonType="RAISED" layoutX="123.0"
+            layoutY="10.0" onAction="#removeAssignment" prefHeight="30.0" prefWidth="126.0"
+            style="-fx-background-color: #ffccbb;" text="Remove Assignment"/>-->
         </AnchorPane>
       </content>
     </Tab>
     <Tab fx:id="settings" text="Settings">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <Hyperlink cacheShape="false" layoutX="176.0" layoutY="103.0" onAction="#updateEmail" text="Update Email" />
+          <JFXTextField fx:id="emailTextField" layoutX="182.0" layoutY="70.0" prefHeight="25.0" prefWidth="258.0" promptText="e.g. sample@eagle.fgcu.edu" text="sample@eagle.fgcu.edu" />
+          <JFXTextField fx:id="usernameTextField" layoutX="182.0" layoutY="155.0" prefHeight="25.0" prefWidth="258.0" promptText="e.g. JohnSmith" text="Your Username" />
+          <Hyperlink cacheShape="false" layoutX="177.0" layoutY="184.0" onAction="#updateUsername" text="Update Username" />
+          <JFXPasswordField fx:id="passwordTextFieldOne" layoutX="182.0" layoutY="235.0" prefHeight="25.0" prefWidth="258.0" promptText="Your Password" />
+          <Hyperlink cacheShape="false" layoutX="178.0" layoutY="308.0" onAction="#updatePassword" text="Update Password" />
           <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
-          <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="305.0" onAction="#updateSettings" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffffff;" text="Update" />
-          <Hyperlink cacheShape="false" layoutX="176.0" layoutY="130.0" text="Update Email" />
-          <JFXTextField editable="false" layoutX="182.0" layoutY="95.0" prefHeight="25.0" prefWidth="258.0" text="sample@eagle.fgcu.edu" />
-          <JFXTextField editable="false" layoutX="182.0" layoutY="165.0" prefHeight="25.0" prefWidth="258.0" text="Your Username" />
-          <Hyperlink cacheShape="false" layoutX="176.0" layoutY="200.0" text="Update Username" />
-          <JFXPasswordField editable="false" layoutX="182.0" layoutY="235.0" prefHeight="25.0" prefWidth="258.0" text="samplepassword" />
-          <Hyperlink cacheShape="false" layoutX="176.0" layoutY="270.0" text="Update Password" />
-          <Label fx:id="user6" text="USERNAME" />
+               <JFXPasswordField fx:id="passwordTextFieldTwo" layoutX="182.0" layoutY="275.0" prefHeight="25.0" prefWidth="258.0" promptText="Your Password" />
+               <Label fx:id="ErrorPassword" alignment="CENTER" layoutX="11.0" layoutY="331.0" prefHeight="24.0" prefWidth="600.0" text="Please fill out the Password Field" textAlignment="CENTER" textFill="crimson" visible="false" />
+               <Label fx:id="ErrorEmail" alignment="CENTER" layoutY="126.0" prefHeight="24.0" prefWidth="600.0" text="Please fill out the Email Field" textAlignment="CENTER" textFill="crimson" visible="false" />
+               <Label fx:id="ErrorUserName" alignment="CENTER" layoutY="207.0" prefHeight="24.0" prefWidth="600.0" text="Please fill out the Username Field" textAlignment="CENTER" textFill="crimson" visible="false" />
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="profile" text="Profile">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
+          <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="330.0" onAction="#updateProfile" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Update" />
+          <JFXButton buttonType="RAISED" layoutX="182.0" layoutY="330.0" onAction="#logout" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Logout" />
+          <JFXTextArea fx:id="aboutMeTextArea" labelFloat="true" layoutX="182.0" layoutY="160.0" prefHeight="61.0" prefWidth="258.0" promptText="About Me" text="" wrapText="true" />
+          <JFXBadge fx:id="profilebadge" layoutX="268.0" layoutY="54.0" prefHeight="64.0" prefWidth="64.0" style="-fx-background-color: #ffccbb;" text="" />
+          <Hyperlink layoutX="245.0" layoutY="124.0" onAction="#updateProfileIcon" text="Update Profile Icon" />
+          <JFXTextArea fx:id="majorTextArea" labelFloat="true" layoutX="182.0" layoutY="240.0" prefHeight="20.0" prefWidth="258.0" promptText="Major" text="" wrapText="true" />
+          <JFXComboBox fx:id="profileComboBox" layoutX="182.0" layoutY="285.0" prefHeight="27.0" prefWidth="258.0" promptText="Choose Role" />
         </AnchorPane>
       </content>
     </Tab>

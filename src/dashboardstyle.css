@@ -1,0 +1,29 @@
+.jfx-tab-pane .tab-selected-line {
+  -fx-background-color: #ffffff;
+  -fx-pref-height: 4px;
+  -fx-background-color: #ffffff;
+}
+
+.jfx-radio-button {
+  -jfx-selected-color: #6eb5c0;
+  -jfx-unselected-color: #6eb5c0;
+}
+
+.jfx-text-field {
+  -jfx-focus-color: #006c84;
+}
+
+.jfx-text-area {
+  -jfx-focus-color: #006c84;
+}
+
+.jfx-password-field {
+  -jfx-focus-color: #006c84;
+}
+
+.jfx-combo-box {
+  -jfx-focus-color: #006c84;
+}
+
+<!--
+#ffccbb #6eb5c0 #006c84-- >

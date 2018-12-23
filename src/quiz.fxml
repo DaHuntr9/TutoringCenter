@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" stylesheets="@dashboardstyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.quizController">
+  <children>
+    <JFXRadioButton fx:id="Answer1" layoutX="130.0" layoutY="161.0" text="Answer #1">
+      <toggleGroup>
+        <ToggleGroup fx:id="toggleGroupQuiz" />
+      </toggleGroup>
+    </JFXRadioButton>
+    <JFXRadioButton fx:id="Answer2" layoutX="130.0" layoutY="191.0" text="Answer #2" toggleGroup="$toggleGroupQuiz" />
+    <JFXRadioButton fx:id="Answer3" layoutX="130.0" layoutY="221.0" text="Answer #3" toggleGroup="$toggleGroupQuiz" />
+    <JFXRadioButton fx:id="Answer4" layoutX="130.0" layoutY="251.0" text="Answer #4" toggleGroup="$toggleGroupQuiz" />
+    <JFXTextArea fx:id="QuizQuestion" editable="false" layoutX="130.0" layoutY="91.0" prefHeight="55.0" prefWidth="375.0" text="This is sample text in order to demonstrate the wrapping feature of a text area." />
+    <JFXButton buttonType="RAISED" layoutX="130.0" layoutY="312.0" onAction="#goToLastQuestion" prefHeight="37.0" prefWidth="69.0" ripplerFill="#167cd0" style="-fx-background-color: #ffccbb;" text="Back" />
+    <JFXButton fx:id="nextQuestionButton" buttonType="RAISED" layoutX="436.0" layoutY="312.0" onAction="#goToNextQuestion" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffccbb;" text="Next" />
+    <Hyperlink fx:id="exitQuiz" layoutX="450.0" layoutY="359.0" onAction="#returnToDashboard" text="Exit Quiz" />
+    <Label alignment="CENTER" layoutY="415.0" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
+      <Label fx:id="ErrorQuizQuestion" alignment="CENTER" layoutY="382.0" prefHeight="24.0" prefWidth="600.0" text="Please Select a Answer" textAlignment="CENTER" textFill="RED" visible="false" />
+  </children>
+</AnchorPane>
