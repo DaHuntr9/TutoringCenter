@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="34.0" prefWidth="600.0">
+         <tabs>
+            <Tab text="Dashboard">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Calendar">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Quizzes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Grades">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Schedule">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Settings">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXRadioButton layoutX="130.0" layoutY="160.0" text="Answer #1" />
+      <JFXRadioButton layoutX="130.0" layoutY="190.0" text="Answer #2" />
+      <JFXRadioButton layoutX="130.0" layoutY="250.0" text="Answer #4" />
+      <JFXRadioButton layoutX="130.0" layoutY="220.0" text="Answer #3" />
+      <JFXListView layoutY="90.0" prefHeight="200.0" prefWidth="93.0" />
+      <Label alignment="CENTER" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" text="Copyright © 2018 Gutterboyz and Son LLC" textAlignment="CENTER" />
+      <JFXTextArea editable="false" layoutX="130.0" layoutY="90.0" prefHeight="55.0" prefWidth="375.0" text="This is sample text in order to demonstrate the wrapping feature of a text area." />
+      <JFXButton buttonType="RAISED" layoutX="130.0" layoutY="311.0" prefHeight="37.0" prefWidth="69.0" ripplerFill="#167cd0" style="-fx-background-color: #ffffff;" text="Back" />
+      <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="311.0" prefHeight="37.0" prefWidth="69.0" style="-fx-background-color: #ffffff;" text="Next" />
+   </children>
+</AnchorPane>

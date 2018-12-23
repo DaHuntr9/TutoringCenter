@@ -95,4 +95,3 @@ public class signupController extends Main {
     stage.show();
   }
 }
-
