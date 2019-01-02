@@ -25,6 +25,11 @@ import java.util.Scanner;
  * Finished Functionality: Verifies login correctly.
  *
  * Version 1.1 Edited 11/25/2018 Created setMainCurrentUser extended login to main
+ * Version 1.2 Edited 1/2/2019
+ * 1. Login validation now sets the User object in main so that it can be accessed
+ * by all classes and shortens all function calls.
+ * 2.
+ *
  */
 
 
@@ -97,6 +102,8 @@ public class Login {
     System.out.println(returnRole(this.UserNumber));
     if (returnRole(this.UserNumber).equals("Tutor")) {
       this.currentUserUser = new User(this.UserNumber);
+      //needs to set the User in main.
+      Main.currentUser = this.currentUserUser;
     }
     if (returnRole(this.UserNumber).equals("Student")) {
       System.out.println("made object of student");

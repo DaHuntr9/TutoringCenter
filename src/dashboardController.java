@@ -881,13 +881,13 @@ public class dashboardController extends Main {
       }
     }
 
-    emailTextField.setText(newLogin.currentUserUser.getUserEmail(newLogin.getUserNumber()));
-    usernameTextField.setText(newLogin.currentUserUser.getUsername(newLogin.getUserNumber()));
+    emailTextField.setText(newLogin.currentUserUser.getUserEmail());
+    usernameTextField.setText(newLogin.currentUserUser.getUsername());
     //passwordTextFieldOne.setText(newLogin.currentUserUser.getPassword(newLogin.getUserNumber()));
-    aboutMeTextArea.setText(newLogin.currentUserUser.getaboutMeText(newLogin.getUserNumber()));
-    majorTextArea.setText(newLogin.currentUserUser.getMajor(newLogin.getUserNumber()));
+    aboutMeTextArea.setText(newLogin.currentUserUser.getaboutMeText());
+    majorTextArea.setText(newLogin.currentUserUser.getMajor());
     profilebadge.setStyle("-fx-background-color:" + newLogin.currentUserUser
-        .getProfileIcon(newLogin.getUserNumber()));
+        .getProfileIcon());
     //this code will set the profile tab's information to be displayed automatically
     profileComboBox.getItems().setAll("Student", "Tutor");
     if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Student")) {

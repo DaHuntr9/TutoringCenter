@@ -31,7 +31,10 @@ public class User {
 
   //This contains all the variables and their associated values for the users instance.
   JSONArray AccountsIN;
-  int UserNumberA;
+  int UserNumber;
+  //this is a place holder varable that will not retain any information.
+  //This is to ensure that all functions work correctly.
+  //Login newLogin;
 
   //Base Constructor to create AccountsIN User array
   public User() {
@@ -66,7 +69,7 @@ public class User {
 
   //Overloaded Constructor that will set the Students User Number for all other functions.
   public User(int UserNumber) {
-    this.UserNumberA = UserNumber;
+    this.UserNumber = UserNumber;
     File file = new File("JSONDATA.txt");
     try {
       Scanner FileInput = new Scanner(file);
@@ -89,7 +92,7 @@ public class User {
   @Override
   public String toString() {
     return "User{" +
-        "UserNumber=" + UserNumberA +
+        "UserNumber=" + UserNumber +
         '}';
   }
 
@@ -104,96 +107,107 @@ public class User {
     return totalNumberOfAccounts;
   }
 
-  public String getUserEmail(int UserNumber) {
+  /**
+   * This function creates the object for the user to read data from based on
+   * the logged in usernumber.
+   * @param UserNumber uses this int to find the correct user's information.
+   * @return returns a JSONOBJECT that contains all information of the user.
+   */
+  public JSONObject getUserInformationObject (int UserNumber){
     //this parses the users account from the constructor
     JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
+    //zero is the code for the user credential storage
     JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String Email = (String) userCredentialsIn.get("Email");
+    return userCredentialsIn;
+  }
+
+  public String getUserEmail() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String Email = (String) userInformationObject.get("Email");
     return Email;
   }
 
-  public String getUsername(int UserNumber) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-    //zero is the code for the user credential storage
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String UsernameIn = (String) userCredentialsIn.get("Username");
+  public String getUsername() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String UsernameIn = (String) userInformationObject.get("Username");
     return UsernameIn;
   }
 
-  public String getPassword(int UserNumber) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-    //zero is the code for the user credential storage
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String PasswordIn = (String) userCredentialsIn.get("Password");
+  public String getPassword() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String PasswordIn = (String) userInformationObject.get("Password");
     return PasswordIn;
   }
 
-  public String getFirstName(int UserNumber) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String FirstName = (String) userCredentialsIn.get("FirstName");
+  public String getFirstName() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String FirstName = (String) userInformationObject.get("FirstName");
     return FirstName;
   }
 
-  public String getLastName(int UserNumber) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+  /**
+   * This function is overloaded inorder to ensure all previous functions operate
+   * as normal. This also allows you to search for individual account's roles.
+   * Thus allowing the programmers to search and create a list of names to be used
+   * in the UI.
+   */
+  public String getFirstName(int UserNumber) {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String FirstName = (String) userInformationObject.get("FirstName");
+    return FirstName;
+  }
 
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String LastName = (String) userCredentialsIn.get("LastName");
+  public String getLastName() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String LastName = (String) userInformationObject.get("LastName");
     return LastName;
   }
 
-  public String getRole(int UserNumber) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String Role = (String) userCredentialsIn.get("AccountType");
+  public String getRole() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String Role = (String) userInformationObject.get("AccountType");
     return Role;
   }
 
-  public String getMajor(int UserNumber) {
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+  /**
+   * This function is overloaded inorder to ensure all previous functions operate
+   * as normal. This also allows you to search for individual account's roles.
+   * Thus allowing the programmers to search and create a list of names to be used
+   * in the UI.
+   */
+  public String getRole(int UserNumber){
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String Role = (String) userInformationObject.get("AccountType");
+    return Role;
+  }
 
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String Major = (String) userCredentialsIn.get("major");
+  public String getMajor() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String Major = (String) userInformationObject.get("major");
     return Major;
-
   }
 
-  public String getaboutMeText(int UserNumber) {
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String aboutMeText = (String) userCredentialsIn.get("aboutMeText");
+  public String getaboutMeText() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String aboutMeText = (String) userInformationObject.get("aboutMeText");
     return aboutMeText;
-
   }
 
-  public String getProfileIcon(int UserNumber) {
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-    String profileIcon = (String) userCredentialsIn.get("ProfileIcon");
+  public String getProfileIcon() {
+    JSONObject userInformationObject = getUserInformationObject(UserNumber);
+    String profileIcon = (String) userInformationObject.get("ProfileIcon");
     return profileIcon;
-
   }
 
   //setters
-  public void setUserEmail(int UserNumber, String Email) {
-    //this parses the users account from the constructor
-    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
 
-    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
-
-    userCredentialsIn.put("Email", Email);
-
+  /**
+   * writeToJSONStruct is a function that is used to reduce code and write to the
+   * associated file. Data is edited in to the individual functions and then calls
+   * this function to write the data.
+   * This function will be used by all setters in the class.
+   */
+  public void writeToJSONStruct() {
     System.out.println(AccountsIN.toJSONString());
 
     //now we will create a file and write the json structure to it.
@@ -207,25 +221,26 @@ public class User {
     System.out.println("File Edited Successfuly");
   }
 
-  public void setUsername(int UserNumber, String Username) {
-    //this parses the users account from the constructor
+  public void setUserEmail(int UserNumber, String Email) {
+    //This parses the users account from the constructor.
     JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
-
+    //This gets the object where the User's Account information is Stored.
     JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    //Puts the new information into the Email object.
+    userCredentialsIn.put("Email", Email);
+    //Writes data to JSON Structure.
+    writeToJSONStruct();
+  }
 
+  public void setUsername(int UserNumber, String Username) {
+    //This parses the users account from the constructor.
+    JSONArray userAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
+    //This gets the object where the User's Account information is Stored.
+    JSONObject userCredentialsIn = (JSONObject) userAccountsIN.get(0);
+    //Puts the new information into the Username object.
     userCredentialsIn.put("Username", Username);
-
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    //Writes data to JSON Structure.
+    writeToJSONStruct();
   }
 
   public void setPassword(int UserNumber, String Password) {
@@ -236,17 +251,7 @@ public class User {
 
     userCredentialsIn.put("Password", Password);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setFirstName(int UserNumber, String FirstName) {
@@ -257,17 +262,7 @@ public class User {
 
     userCredentialsIn.put("FirstName", FirstName);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setLastName(int UserNumber, String LastName) {
@@ -278,17 +273,7 @@ public class User {
 
     userCredentialsIn.put("LastName", LastName);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setRole(int UserNumber, String AccountType) {
@@ -299,18 +284,7 @@ public class User {
 
     userCredentialsIn.put("AccountType", AccountType);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
-
+    writeToJSONStruct();
   }
 
   public void setMajor(int UserNumber, String major) {
@@ -321,17 +295,7 @@ public class User {
 
     userCredentialsIn.put("major", major);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAboutMeText(int UserNumber, String aboutMeText) {
@@ -342,17 +306,7 @@ public class User {
 
     userCredentialsIn.put("aboutMeText", aboutMeText);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setProfileIcon(int UserNumber, String ProfileIcon) {
@@ -363,17 +317,7 @@ public class User {
 
     userCredentialsIn.put("ProfileIcon", ProfileIcon);
 
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   /**
