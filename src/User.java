@@ -21,6 +21,13 @@ import java.util.Scanner;
  * Version 1.1:
  * Assignments getter setter and creation adjusted.
  *
+ * Version 1.2:
+ * 1.Created functions writeToJSONStruct and getUserInformationObject-
+ *    By doing so it reduced lines of code and prevents redundency.
+ * 2.Removed int parameters for most functions that do not need more then the UserNumber.
+ * 3.Added overloaded functions for functions that need to search for all user's
+ *    first names and account types.
+ *
  * Notes:
  * This code is extremely Redundent but upon trying to condense it into substitute functions,
  * the Getters and Setters would produce errors. So I left the document with un-condensed functions
@@ -349,19 +356,8 @@ public class User {
     //System.out.println(Attendance);
     AppointmentArrayInstance.add(AppointmentData);
     //System.out.println("added");
-
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   public void setAppointmentComment(int UserNumber, int appointmentNumber, String Comments) {
@@ -374,17 +370,7 @@ public class User {
         .get(appointmentNumber);
     individualAppointmentData.put("Comments", Comments);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   //getters
@@ -452,7 +438,7 @@ public class User {
     return Attendance;
   }
 
-  //setters
+  //setters 
   public void setAppointmentDate(int UserNumber, int appointmentNumber, String AppointmentDate) {
     //this parses the users account from the constructor
     JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(UserNumber);
@@ -463,17 +449,7 @@ public class User {
         .get(appointmentNumber);
     individualAppointmentdata.put("AppointmentDate", AppointmentDate);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAppointmentTime(int UserNumber, int appointmentNumber, String AppointmentTime) {
@@ -483,20 +459,10 @@ public class User {
     JSONArray appointmentArrayInstance = (JSONArray) UserAccountsIN.get(1);
     //this is the new object that will be added to the array
     JSONObject individualAppointmentdata = (JSONObject) appointmentArrayInstance
-        .get(appointmentNumber);
+            .get(appointmentNumber);
     individualAppointmentdata.put("Time", AppointmentTime);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAppointmentSubject(int UserNumber, int appointmentNumber,
@@ -510,17 +476,7 @@ public class User {
     //potential spelling error
     individualAppointmentData.put("Subject", Subject);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAppointmentLocation(int UserNumber, int appointmentNumber, String Location) {
@@ -533,17 +489,7 @@ public class User {
         .get(appointmentNumber);
     individualAppointmentData.put("Location", Location);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAppointmentTutor(int UserNumber, int appointmentNumber, String TutorName) {
@@ -556,17 +502,7 @@ public class User {
         .get(appointmentNumber);
     individualAppointmentData.put("TutorName", TutorName);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAppointmentAttendance(int UserNumber, int appointmentNumber, String Attendance) {
@@ -579,17 +515,7 @@ public class User {
         .get(appointmentNumber);
     individualAppointmentData.put("Attendance", Attendance);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   /**
@@ -616,16 +542,7 @@ public class User {
     //adds assignment to the array
     AssignmentArrayInstance.add(AssignmentData);
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   //getters
@@ -712,17 +629,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("AssignmentName", AssignmentName);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setMaxPoints(int UserNumber, int assignmentNumber, int MaxPoints) {
@@ -735,17 +642,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("MaxPoints", MaxPoints);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setPointsReceived(int UserNumber, int assignmentNumber,
@@ -758,17 +655,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("PointsReceived", PointsReceived);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setComments(int UserNumber, int assignmentNumber,
@@ -781,17 +668,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("Comments", Comments);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAssignmentType(int UserNumber, int assignmentNumber,
@@ -804,17 +681,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("AssignmentType", AssignmentType);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   /**
@@ -836,16 +703,7 @@ public class User {
     //adds assignment to the array
     ReviewArrayInstance.add(ReviewData);
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file)) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   //getters
@@ -926,17 +784,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("TutorName", TutorName);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setReviewSubject(int UserNumber, int assignmentNumber, String SubjectName) {
@@ -949,17 +797,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("Subject", SubjectName);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setReviewComment(int UserNumber, int assignmentNumber,
@@ -972,17 +810,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("Comments", Comments);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setReviewFlagged(int UserNumber, int assignmentNumber,
@@ -995,17 +823,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("ReviewFlagged", ReviewFlagged);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setReviewValue(int UserNumber, int assignmentNumber,
@@ -1018,17 +836,7 @@ public class User {
         .get(assignmentNumber);
     individualAssignmentData.put("ReviewValue", ReviewValue);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
 
@@ -1057,16 +865,7 @@ public class User {
     IndividualQuizArray.add(QuizData);
 
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   public void createQuiz(int UserNumber) {
@@ -1091,16 +890,7 @@ public class User {
     IndividualQuizArray.add(QuizData);*/
 
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   //getters
@@ -1194,17 +984,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("QuizQuestion", QuizQuestion);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAnswerOne(int UserNumber, String AnswerOne, int quizNumber,
@@ -1218,17 +998,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("AnswerOne", AnswerOne);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAnswerTwo(int UserNumber, String AnswerTwo, int quizNumber,
@@ -1242,17 +1012,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("AnswerTwo", AnswerTwo);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAnswerThree(int UserNumber, String AnswerThree, int quizNumber,
@@ -1266,17 +1026,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("AnswerThree", AnswerThree);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setAnswerFour(int UserNumber, String AnswerFour, int quizNumber,
@@ -1290,17 +1040,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("AnswerFour", AnswerFour);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setQuestionAnswer(int UserNumber, String QuestionAnswer, int quizNumber,
@@ -1313,18 +1053,7 @@ public class User {
     JSONArray quizNumberArrayIn = (JSONArray) quizArrayIn.get(quizNumber);
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("QuestionAnswer", QuestionAnswer);
-    //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   public void setUserAnswer(int UserNumber, String UserAnswer, int quizNumber,
@@ -1338,17 +1067,7 @@ public class User {
     JSONObject individualAssignmentData = (JSONObject) quizNumberArrayIn.get(quizQuestionNumber);
     individualAssignmentData.put("UserAnswer", UserAnswer);
     //print to file and console
-    System.out.println(AccountsIN.toJSONString());
-
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File Edited Successfuly");
+    writeToJSONStruct();
   }
 
   /**
@@ -1364,16 +1083,7 @@ public class User {
     LoginData.put("Logout", Login);
     LoginArrayInstance.add(LoginData);
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   public void setLogout(int UserNumber, String Logout) {
@@ -1384,16 +1094,7 @@ public class User {
     JSONObject LoginData = (JSONObject) LoginArrayInstance.get(LoginArrayInstance.size() - 1);
     LoginData.put("Logout", Logout);
     //print the JSON Structure
-    System.out.println(AccountsIN.toJSONString());
-    //now we will create a file and write the json structure to it.
-    //makes a file object and passes it as a parameter as a printer
-    File file = new File("JSONDATA.txt");
-    try (PrintWriter writer = new PrintWriter(file);) {
-      writer.print(AccountsIN.toJSONString());
-    } catch (FileNotFoundException ex) {
-      System.out.println(ex.toString());
-    }
-    System.out.println("File updated successfully");
+    writeToJSONStruct();
   }
 
   public String getLogin(int UserNumber, int loginNumber) {
