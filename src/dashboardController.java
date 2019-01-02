@@ -179,7 +179,7 @@ public class dashboardController extends Main {
   private void goToScheduleTutoringCenter(ActionEvent event) throws IOException {
     SingleSelectionModel<Tab> selectionModel = tabpane.getSelectionModel();
     selectionModel.select(schedule);
-    if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
+    if (currentUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
       selectionModel.select(scheduleTutor);
     }
 
@@ -238,26 +238,25 @@ public class dashboardController extends Main {
     //System.out.println(dtf.format(now));
     Comment.setText(dtf.format(now));
     //System.out.println(newLogin.currentUserUser.getAppointmentDate(newLogin.currentUserUser.UserNumber,(int) appointmentComboBox.getValue()));
-    newLogin.currentUserUser
-        .setAppointmentComment(newLogin.getUserNumber(), (int) appointmentComboBox.getValue(),
+    currentUser.setAppointmentComment(newLogin.getUserNumber(), (int) appointmentComboBox.getValue(),
             dtf.format(now));
     updateAssignments(new ActionEvent());
     if (Integer.parseInt(
-        newLogin.currentUserUser
+        currentUser
             .getAppointmentDate(newLogin.getUserNumber(), (int) appointmentComboBox.getValue())
             .substring(8, 10))
         - Integer.parseInt(dtf.format(now).substring(3, 5)) > 0) {
       //System.out.println("Late Level 1");
       try {
         if (Integer.parseInt(
-            newLogin.currentUserUser
+            currentUser
                 .getAppointmentDate(newLogin.getUserNumber(), (int) appointmentComboBox.getValue())
                 .substring(3, 5))
             - Integer.parseInt(dtf.format(now).substring(0, 2)) <= 0) {
           //System.out.println("Late Level 2");
           System.out.println("Absent!");
           passed = true;
-          newLogin.currentUserUser.setAppointmentAttendance(newLogin.getUserNumber(),
+          currentUser.setAppointmentAttendance(newLogin.getUserNumber(),
               (int) appointmentComboBox.getValue(), "Late");
           //System.out.println(Integer.parseInt(dtf.format(now).substring(3, 5)));
           //System.out.println(Integer.parseInt(dtf.format(now).substring(0, 2)));
@@ -268,19 +267,19 @@ public class dashboardController extends Main {
     }
     if (passed == false) {
       if (Integer.parseInt(
-          newLogin.currentUserUser
+          currentUser
               .getAppointmentDate(newLogin.getUserNumber(), (int) appointmentComboBox.getValue())
               .substring(8, 10))
           - Integer.parseInt(dtf.format(now).substring(3, 5)) > 0) {
         //System.out.println("Present Level 1");
         if (Integer.parseInt(
-            newLogin.currentUserUser
+            currentUser
                 .getAppointmentDate(newLogin.getUserNumber(), (int) appointmentComboBox.getValue())
                 .substring(5, 7))
             - Integer.parseInt(dtf.format(now).substring(0, 2)) >= 0) {
           //System.out.println("present Level 2");
           System.out.println("Present!");
-          newLogin.currentUserUser.setAppointmentAttendance(newLogin.getUserNumber(),
+          currentUser.setAppointmentAttendance(newLogin.getUserNumber(),
               (int) appointmentComboBox.getValue(), "Present");
         }
       }
@@ -381,14 +380,14 @@ public class dashboardController extends Main {
     // Adds default events to the schedule list
     ObservableList<Schedule> Schedule = FXCollections.observableArrayList();
     int counter = 0;
-    while (counter < newLogin.currentUserUser.getNumberOfAppointments(newLogin.getUserNumber())) {
+    while (counter < currentUser.getNumberOfAppointments(newLogin.getUserNumber())) {
       Schedule.add(new Schedule(
-          newLogin.currentUserUser.getAppointmentSubject(newLogin.getUserNumber(), counter),
-          newLogin.currentUserUser.getAppointmentTutor(newLogin.getUserNumber(), counter),
-          newLogin.currentUserUser.getAppointmentComments(newLogin.getUserNumber(), counter),
-          newLogin.currentUserUser.getAppointmentDate(newLogin.getUserNumber(), counter),
-          newLogin.currentUserUser.getAppointmentTime(newLogin.getUserNumber(), counter),
-          newLogin.currentUserUser.getAppointmentLocation(newLogin.getUserNumber(), counter)));
+          currentUser.getAppointmentSubject(newLogin.getUserNumber(), counter),
+          currentUser.getAppointmentTutor(newLogin.getUserNumber(), counter),
+          currentUser.getAppointmentComments(newLogin.getUserNumber(), counter),
+          currentUser.getAppointmentDate(newLogin.getUserNumber(), counter),
+          currentUser.getAppointmentTime(newLogin.getUserNumber(), counter),
+          currentUser.getAppointmentLocation(newLogin.getUserNumber(), counter)));
       counter++;
     }
 
@@ -494,7 +493,7 @@ public class dashboardController extends Main {
     try {
       if (!roleDropDownOne.getValue().toString().equals("") || !reviewContent.getText().equals("")
           || !roleDropDownTwo.getValue().toString().equals("")) {
-        newLogin.currentUserUser.createReview(newLogin.getUserNumber(),
+        currentUser.createReview(newLogin.getUserNumber(),
             roleDropDownOne.getValue().toString(), roleDropDownTwo.getValue().toString(),
             reviewContent.getText(),
             false,
@@ -561,15 +560,14 @@ public class dashboardController extends Main {
       String time = TimePicked.getValue().toString();
       String location = Location.getText();
       //temporary.add(new Schedule(subject, tutor, comment, date, time, location));
-      newLogin.currentUserUser
-          .createAppointment(newLogin.getUserNumber(), subject, tutor, date, location, "", time,
+      currentUser.createAppointment(newLogin.getUserNumber(), subject, tutor, date, location, "", time,
               comment);
     } catch (Exception e) {
       ErrorSchedule.setVisible(true);
     }
     appointmentComboBox.getItems().clear();
     for (int i = 0;
-        i <= newLogin.currentUserUser.getNumberOfAppointments(newLogin.getUserNumber()) - 1; i++) {
+        i <= currentUser.getNumberOfAppointments(newLogin.getUserNumber()) - 1; i++) {
       try {
         appointmentComboBox.getItems().addAll(i);
       } catch (Exception e) {
@@ -604,7 +602,7 @@ public class dashboardController extends Main {
     try {
       String newEmail = emailTextField.getText();//grabs the new email value
       if (!newEmail.equals("")) {
-        newLogin.currentUserUser.setUserEmail(newLogin.getUserNumber(), newEmail);
+        currentUser.setUserEmail(newLogin.getUserNumber(), newEmail);
         System.out.println("email updated");
         ErrorEmail.setVisible(false);
       } else {
@@ -629,7 +627,7 @@ public class dashboardController extends Main {
     try {
       String newUsername = usernameTextField.getText();
       if (!newUsername.equals("")) {
-        newLogin.currentUserUser.setUsername(newLogin.getUserNumber(), newUsername);
+        currentUser.setUsername(newLogin.getUserNumber(), newUsername);
         System.out.println("username updated");
         ErrorUserName.setVisible(false);
       } else {
@@ -656,7 +654,7 @@ public class dashboardController extends Main {
       String newPassword2 = passwordTextFieldTwo.getText();
       if (newPassword1.equals(newPassword2) && !newPassword1.equals("") && newPassword1.length() > 5
           && newPassword1.length() < 33) {
-        newLogin.currentUserUser.setPassword(newLogin.getUserNumber(), newPassword1);
+        currentUser.setPassword(newLogin.getUserNumber(), newPassword1);
         System.out.println("password updated");
         ErrorPassword.setVisible(false);
       } else {
@@ -722,7 +720,7 @@ public class dashboardController extends Main {
     }
     System.out.println(sb);
     profilebadge.setStyle("-fx-background-color:" + sb);
-    newLogin.currentUserUser.setProfileIcon(newLogin.getUserNumber(), sb.toString());
+    currentUser.setProfileIcon(newLogin.getUserNumber(), sb.toString());
   }
 
   /**
@@ -730,10 +728,9 @@ public class dashboardController extends Main {
    */
   @FXML
   private void updateProfile(ActionEvent event) throws IOException {
-    newLogin.currentUserUser.setAboutMeText(newLogin.getUserNumber(), aboutMeTextArea.getText());
-    newLogin.currentUserUser.setMajor(newLogin.getUserNumber(), aboutMeTextArea.getText());
-    newLogin.currentUserUser
-        .setRole(newLogin.getUserNumber(), profileComboBox.getValue().toString());
+    currentUser.setAboutMeText(newLogin.getUserNumber(), aboutMeTextArea.getText());
+    currentUser.setMajor(newLogin.getUserNumber(), aboutMeTextArea.getText());
+    currentUser.setRole(newLogin.getUserNumber(), profileComboBox.getValue().toString());
   }
 
   /**
@@ -809,30 +806,30 @@ public class dashboardController extends Main {
     class1quiz.setVisible(false);
     class2quiz.setVisible(false);
     class3quiz.setVisible(false);
-    if (newLogin.currentUserUser.getNumberOfQuizzes(newLogin.getUserNumber()) == 1) {
+    if (currentUser.getNumberOfQuizzes(newLogin.getUserNumber()) == 1) {
       QuizErrorA.setVisible(false);
       class1quiz.setVisible(true);
       class2quiz.setVisible(false);
       class3quiz.setVisible(false);
-    } else if (newLogin.currentUserUser.getNumberOfQuizzes(newLogin.getUserNumber()) == 2) {
+    } else if (currentUser.getNumberOfQuizzes(newLogin.getUserNumber()) == 2) {
       QuizErrorA.setVisible(false);
       class1quiz.setVisible(true);
       class2quiz.setVisible(true);
       class3quiz.setVisible(false);
-    } else if (newLogin.currentUserUser.getNumberOfQuizzes(newLogin.getUserNumber()) > 3) {
+    } else if (currentUser.getNumberOfQuizzes(newLogin.getUserNumber()) > 3) {
       QuizErrorA.setVisible(false);
       class1quiz.setVisible(true);
       class2quiz.setVisible(true);
       class3quiz.setVisible(true);
     }
 
-    if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
+    if (currentUser.getRole().equals("Tutor")) {
       tabpane.getTabs().remove(schedule);
       tabpane.getTabs().remove(quizzes);
       scheduleTutor.setText("Assignments");
       quizzesTutor.setText("Create Quiz");
       scheduleTutoring.setText("Create Assignments");
-    } else if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Student")) {
+    } else if (currentUser.getRole().equals("Student")) {
       tabpane.getTabs().remove(scheduleTutor);
       tabpane.getTabs().remove(quizzesTutor);
     }
@@ -843,9 +840,9 @@ public class dashboardController extends Main {
     //completeQuizCreation.setVisible(true);
 
     //while(newLogin.currentUserUser.getTotalNumberOfAccounts()){}
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String tutorName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String tutorName = currentUser.getFirstName(i);
       if (role.equals("Tutor")) {
         //need to add tutors to an array of strings
         //System.out.println("adding");
@@ -856,8 +853,7 @@ public class dashboardController extends Main {
     SubjectPicked.getItems().setAll("Biology", "Chemistry", "Math", "OOP");
     roleDropDownTwo.getItems().setAll("Biology", "Chemistry", "Math", "OOP");
 
-    for (int i = 0;
-        i <= newLogin.currentUserUser.getNumberOfAppointments(newLogin.getUserNumber()) - 1; i++) {
+    for (int i = 0; i <= currentUser.getNumberOfAppointments(newLogin.getUserNumber()) - 1; i++) {
       try {
         appointmentComboBox.getItems().addAll(i);
       } catch (Exception e) {
@@ -865,45 +861,44 @@ public class dashboardController extends Main {
       }
     }
     //int StudentNumber = 0;
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String StudentName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String StudentName = currentUser.getFirstName(i);
       if (role.equals("Student")) {
         AssignmentNumberDropDown.getItems().addAll(StudentName);
       }
     }
 
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String tutorName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String tutorName = currentUser.getFirstName(i);
       if (role.equals("Student")) {
         selectedstudent.getItems().addAll(tutorName);
       }
     }
 
-    emailTextField.setText(newLogin.currentUserUser.getUserEmail());
-    usernameTextField.setText(newLogin.currentUserUser.getUsername());
+    emailTextField.setText(currentUser.getUserEmail());
+    usernameTextField.setText(currentUser.getUsername());
     //passwordTextFieldOne.setText(newLogin.currentUserUser.getPassword(newLogin.getUserNumber()));
-    aboutMeTextArea.setText(newLogin.currentUserUser.getaboutMeText());
-    majorTextArea.setText(newLogin.currentUserUser.getMajor());
-    profilebadge.setStyle("-fx-background-color:" + newLogin.currentUserUser
-        .getProfileIcon());
+    aboutMeTextArea.setText(currentUser.getaboutMeText());
+    majorTextArea.setText(currentUser.getMajor());
+    profilebadge.setStyle("-fx-background-color:" + currentUser.getProfileIcon());
     //this code will set the profile tab's information to be displayed automatically
     profileComboBox.getItems().setAll("Student", "Tutor");
-    if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Student")) {
+    if (currentUser.getRole(newLogin.getUserNumber()).equals("Student")) {
       profileComboBox.getSelectionModel().selectFirst();
     }
-    if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
+    if (currentUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
       profileComboBox.getSelectionModel().selectLast();
     }
     try {
       ArrayList<Double> average = new ArrayList<Double>();
       int counter = 0;
-      while (counter < newLogin.currentUserUser.getNumberOfAssignments(newLogin.getUserNumber())) {
-        double a = Double.parseDouble(newLogin.currentUserUser
+      while (counter < currentUser.getNumberOfAssignments(newLogin.getUserNumber())) {
+        double a = Double.parseDouble(currentUser
             .getAssignmentPointsReceived(newLogin.getUserNumber(), counter));
         double b = Double.parseDouble(
-            newLogin.currentUserUser.getAssignmentMaxPoints(newLogin.getUserNumber(), counter));
+            currentUser.getAssignmentMaxPoints(newLogin.getUserNumber(), counter));
         System.out.println(a);
         System.out.println(b);
         double Calculation = (a / b);
@@ -931,13 +926,12 @@ public class dashboardController extends Main {
     try {
       double ontime = 0;
       int counterattendence = 0;
-      System.out.println("numberofAppointments"+newLogin.currentUserUser
-          .getNumberOfAppointments(newLogin.getUserNumber()));
-      while (counterattendence < newLogin.currentUserUser
+      System.out.println("numberofAppointments"+currentUser.getNumberOfAppointments(newLogin.getUserNumber()));
+      while (counterattendence < currentUser
           .getNumberOfAppointments(newLogin.getUserNumber())) {
-        System.out.println(newLogin.currentUserUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence));
-        System.out.println(newLogin.currentUserUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence).equals("Present"));
-        if (newLogin.currentUserUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence).equals("Present")) {
+        System.out.println(currentUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence));
+        System.out.println(currentUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence).equals("Present"));
+        if (currentUser.getAppointmentAttendance(newLogin.getUserNumber(), counterattendence).equals("Present")) {
           System.out.println("Present");
           ontime++;
         }
@@ -1080,17 +1074,17 @@ public class dashboardController extends Main {
     ObservableList<Assignment> assignment = FXCollections.observableArrayList();
     int firstcounter = 0;
     int secondcounter = 0;
-    while (firstcounter < newLogin.currentUserUser.getTotalNumberOfAccounts()) {
-      while (secondcounter < newLogin.currentUserUser.getNumberOfAssignments(firstcounter)) {
+    while (firstcounter < currentUser.getTotalNumberOfAccounts()) {
+      while (secondcounter < currentUser.getNumberOfAssignments(firstcounter)) {
         assignment.add(new Assignment(
-            newLogin.currentUserUser.getAssignmentName(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentMaxPoints(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentPointsReceived(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentComments(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentDatePicked(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentTimePicked(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentType(firstcounter, secondcounter)
-            , newLogin.currentUserUser.getAssignmentSelectedStudent(firstcounter, secondcounter)));
+            currentUser.getAssignmentName(firstcounter, secondcounter)
+            , currentUser.getAssignmentMaxPoints(firstcounter, secondcounter)
+            , currentUser.getAssignmentPointsReceived(firstcounter, secondcounter)
+            , currentUser.getAssignmentComments(firstcounter, secondcounter)
+            , currentUser.getAssignmentDatePicked(firstcounter, secondcounter)
+            , currentUser.getAssignmentTimePicked(firstcounter, secondcounter)
+            , currentUser.getAssignmentType(firstcounter, secondcounter)
+            , currentUser.getAssignmentSelectedStudent(firstcounter, secondcounter)));
         secondcounter++;
       }
       firstcounter++;
@@ -1238,9 +1232,9 @@ public class dashboardController extends Main {
   private void completeQuizCreation(ActionEvent event) throws IOException {
 
     int StudentNumber = 0;
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String StudentName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String StudentName = currentUser.getFirstName(i);
       if (role.equals("Student")) {
         if (StudentName.equals(selectedstudent.getValue().toString())) {
           StudentNumber = i;
@@ -1249,7 +1243,7 @@ public class dashboardController extends Main {
     }
 
     //store destined user in JSON
-    newLogin.currentUserUser.createQuiz(StudentNumber);
+    currentUser.createQuiz(StudentNumber);
     for (int i = 0; i < temporaryString.length - 1; i++) {
       String correctAnswer = "null";
       int correctAnswerIndex = 0;
@@ -1274,8 +1268,8 @@ public class dashboardController extends Main {
       }
       temporaryString[i][correctAnswerIndex] = temporaryString[i][correctAnswerIndex]
           .substring(0, temporaryString[i][correctAnswerIndex].indexOf("*"));
-      int numofquiz = newLogin.currentUserUser.getNumberOfQuizzes(StudentNumber);
-      newLogin.currentUserUser.addQuizQuestion(StudentNumber,
+      int numofquiz = currentUser.getNumberOfQuizzes(StudentNumber);
+      currentUser.addQuizQuestion(StudentNumber,
           numofquiz - 1,
           temporaryString[i][0],
           temporaryString[i][1],

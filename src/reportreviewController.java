@@ -37,7 +37,7 @@ public class reportreviewController extends ratereviewController {
    */
   @FXML
   private void submit(ActionEvent event) throws IOException {
-    newLogin.currentUserUser.setReviewFlagged(userAccountPointer, reviewAccountPointer, true);
+    currentUser.setReviewFlagged(userAccountPointer, reviewAccountPointer, true);
     String error = "Thank you for contributing to the community.";
     errortext.setText(error);
   }

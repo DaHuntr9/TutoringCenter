@@ -57,9 +57,9 @@ public class createassignmentController extends Main {
     try {
 
       int StudentNumber = 0;
-      for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-        String role = newLogin.currentUserUser.getRole(i);
-        String StudentName = newLogin.currentUserUser.getFirstName(i);
+      for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+        String role = currentUser.getRole(i);
+        String StudentName = currentUser.getFirstName(i);
         if (role.equals("Student")) {
           if (StudentName.equals(selectedstudent.getValue().toString())) {
             StudentNumber = i;
@@ -75,7 +75,7 @@ public class createassignmentController extends Main {
       String timePicked = timepicked.getValue().toString();
       String assignmentType = assignmenttype.getText();
       String selectedStudent = selectedstudent.getValue().toString();
-      newLogin.currentUserUser
+      currentUser
           .createAssignment(StudentNumber, assignmentName, assignmentType, Comments,
               maxPoints, pointsReceived, datePicked, timePicked, selectedStudent);
       ErrorAssignmnets.setText("Submitted Assignment");
@@ -108,9 +108,9 @@ public class createassignmentController extends Main {
   @FXML
   public void initialize() {
 
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String tutorName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String tutorName = currentUser.getFirstName(i);
       if (role.equals("Student")) {
         selectedstudent.getItems().addAll(tutorName);
       }

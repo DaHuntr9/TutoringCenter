@@ -45,15 +45,15 @@ public class quizController extends Main {
    */
   @FXML
   public void initialize() {
-    QuizQuestion.setText(newLogin.currentUserUser
+    QuizQuestion.setText(currentUser
         .getQuizQuestion(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer1.setText(newLogin.currentUserUser
+    Answer1.setText(currentUser
         .getAnswerOne(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer2.setText(newLogin.currentUserUser
+    Answer2.setText(currentUser
         .getAnswerTwo(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer3.setText(newLogin.currentUserUser
+    Answer3.setText(currentUser
         .getAnswerThree(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer4.setText(newLogin.currentUserUser
+    Answer4.setText(currentUser
         .getAnswerFour(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
   }
 
@@ -66,7 +66,7 @@ public class quizController extends Main {
   @FXML
   private void goToNextQuestion(ActionEvent event) throws IOException {
     if (currentQuestionIndex == (
-        newLogin.currentUserUser.getNumberOfQuestions(newLogin.getUserNumber(), QuizNumberReference)
+        currentUser.getNumberOfQuestions(newLogin.getUserNumber(), QuizNumberReference)
             - 1)) {
       // Takes user to the dashboard when submission is pressed
       Stage stage = Main.getPrimaryStage();
@@ -78,19 +78,19 @@ public class quizController extends Main {
       currentQuestionIndex++;
     }
     if (Answer1.isSelected()) {
-      newLogin.currentUserUser
+      currentUser
           .setUserAnswer(newLogin.getUserNumber(), "A", QuizNumberReference, currentQuestionIndex);
       goToNextQuestionPartTwo();
     } else if (Answer2.isSelected()) {
-      newLogin.currentUserUser
+      currentUser
           .setUserAnswer(newLogin.getUserNumber(), "B", QuizNumberReference, currentQuestionIndex);
       goToNextQuestionPartTwo();
     } else if (Answer3.isSelected()) {
-      newLogin.currentUserUser
+      currentUser
           .setUserAnswer(newLogin.getUserNumber(), "C", QuizNumberReference, currentQuestionIndex);
       goToNextQuestionPartTwo();
     } else if (Answer4.isSelected()) {
-      newLogin.currentUserUser
+      currentUser
           .setUserAnswer(newLogin.getUserNumber(), "D", QuizNumberReference, currentQuestionIndex);
       goToNextQuestionPartTwo();
     } else {
@@ -105,20 +105,20 @@ public class quizController extends Main {
     Answer3.setSelected(false);
     Answer4.setSelected(false);
 
-    QuizQuestion.setText(newLogin.currentUserUser
+    QuizQuestion.setText(currentUser
         .getQuizQuestion(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer1.setText(newLogin.currentUserUser
+    Answer1.setText(currentUser
         .getAnswerOne(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer2.setText(newLogin.currentUserUser
+    Answer2.setText(currentUser
         .getAnswerTwo(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer3.setText(newLogin.currentUserUser
+    Answer3.setText(currentUser
         .getAnswerThree(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-    Answer4.setText(newLogin.currentUserUser
+    Answer4.setText(currentUser
         .getAnswerFour(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
     System.out.println(currentQuestionIndex);
 
     // If the last question is being viewed, the "Next" button becomes "Submit"
-    if (currentQuestionIndex == (newLogin.currentUserUser
+    if (currentQuestionIndex == (currentUser
         .getNumberOfQuestions(newLogin.getUserNumber(), QuizNumberReference)) - 1) {
       nextQuestionButton.setText("Submit");
     }
@@ -132,15 +132,15 @@ public class quizController extends Main {
     // If the user is viewing any question that is not the first question
     if (currentQuestionIndex > 0) {
       currentQuestionIndex--;
-      QuizQuestion.setText(newLogin.currentUserUser
+      QuizQuestion.setText(currentUser
           .getQuizQuestion(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-      Answer1.setText(newLogin.currentUserUser
+      Answer1.setText(currentUser
           .getAnswerOne(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-      Answer2.setText(newLogin.currentUserUser
+      Answer2.setText(currentUser
           .getAnswerTwo(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-      Answer3.setText(newLogin.currentUserUser
+      Answer3.setText(currentUser
           .getAnswerThree(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
-      Answer4.setText(newLogin.currentUserUser
+      Answer4.setText(currentUser
           .getAnswerFour(newLogin.getUserNumber(), QuizNumberReference, currentQuestionIndex));
       // If the last question is not being viewed, the "Next" button becomes "Submit"
       nextQuestionButton.setText("Next");

@@ -43,9 +43,9 @@ public class ratereviewController extends Main {
   public void initialize() {
     //need to populate the total number of tutors to the reviews drop down.
     //need to loop through the users to find the number of tutors
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String tutorName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String tutorName = currentUser.getFirstName(i);
       if (role.equals("Tutor")) {
         //need to add tutors to an array of strings
         //System.out.println("adding");
@@ -84,24 +84,24 @@ public class ratereviewController extends Main {
   private void submit(ActionEvent event) throws IOException {
     try {
       System.out.println("submit pressed");
-      System.out.println("NumberOfAccounts " + newLogin.currentUserUser.getTotalNumberOfAccounts());
+      System.out.println("NumberOfAccounts " + currentUser.getTotalNumberOfAccounts());
       //need to loop through all accounts reviews and find the first review that matches the tutor
-      for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
+      for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
         //i is the number of the current account in use
-        for (int j = 0; j <= newLogin.currentUserUser.getNumberOfReview(i) - 1; j++) {
-          System.out.println("NumberOfReviews " + newLogin.currentUserUser.getNumberOfReview(i));
+        for (int j = 0; j <= currentUser.getNumberOfReview(i) - 1; j++) {
+          System.out.println("NumberOfReviews " + currentUser.getNumberOfReview(i));
           //j is the number of specific review
           System.out.println("DropDown value T " + roleDropDownOne.getValue().toString());
-          System.out.println("Review value T " + newLogin.currentUserUser.getReviewTutor(i, j));
-          if (newLogin.currentUserUser.getReviewTutor(i, j)
+          System.out.println("Review value T " + currentUser.getReviewTutor(i, j));
+          if (currentUser.getReviewTutor(i, j)
               .equals(roleDropDownOne.getValue().toString())) {
             System.out.println("DropDown2 value S " + roleDropDownTwo.getValue().toString());
-            System.out.println("Review value S " + newLogin.currentUserUser.getReviewSubject(i, j));
-            if (newLogin.currentUserUser.getReviewSubject(i, j)
+            System.out.println("Review value S " + currentUser.getReviewSubject(i, j));
+            if (currentUser.getReviewSubject(i, j)
                 .equals(roleDropDownTwo.getValue().toString())) {
-              if (newLogin.currentUserUser.getReviewFlagged(i, j) == false) {
-                reviewText.setText(newLogin.currentUserUser.getReviewComment(i, j));
-                tutorValue.setText(newLogin.currentUserUser.getReviewValue(i, j));
+              if (currentUser.getReviewFlagged(i, j) == false) {
+                reviewText.setText(currentUser.getReviewComment(i, j));
+                tutorValue.setText(currentUser.getReviewValue(i, j));
                 userAccountPointer = i;
                 reviewAccountPointer = j;
                 System.out.println("end of submit");
@@ -131,21 +131,21 @@ public class ratereviewController extends Main {
       boolean success = false;
       reviewAccountPointer++;
       //need to loop through all accounts reviews and find the first review that matches the tutor
-      while (userAccountPointer < newLogin.currentUserUser.getTotalNumberOfAccounts()) {
+      while (userAccountPointer < currentUser.getTotalNumberOfAccounts()) {
         //i is the number of the current account in use
-        while (reviewAccountPointer <= newLogin.currentUserUser
+        while (reviewAccountPointer <= currentUser
             .getNumberOfReview(userAccountPointer)) {
           //j is the number of specific review
-          if (newLogin.currentUserUser.getReviewTutor(userAccountPointer, reviewAccountPointer)
+          if (currentUser.getReviewTutor(userAccountPointer, reviewAccountPointer)
               .equals(roleDropDownOne.getValue().toString())) {
-            if (newLogin.currentUserUser.getReviewSubject(userAccountPointer, reviewAccountPointer)
+            if (currentUser.getReviewSubject(userAccountPointer, reviewAccountPointer)
                 .equals(roleDropDownTwo.getValue().toString())) {
-              if (newLogin.currentUserUser
+              if (currentUser
                   .getReviewFlagged(userAccountPointer, reviewAccountPointer)
                   == false) {
-                reviewText.setText(newLogin.currentUserUser
+                reviewText.setText(currentUser
                     .getReviewComment(userAccountPointer, reviewAccountPointer));
-                tutorValue.setText(newLogin.currentUserUser
+                tutorValue.setText(currentUser
                     .getReviewValue(userAccountPointer, reviewAccountPointer));
                 success = true;
                 break;
@@ -188,14 +188,14 @@ public class ratereviewController extends Main {
   private void rateUp(ActionEvent event) throws IOException {
     try {
       Integer reviewValueBefore = Integer.parseInt(
-          newLogin.currentUserUser.getReviewValue(userAccountPointer, reviewAccountPointer));
+          currentUser.getReviewValue(userAccountPointer, reviewAccountPointer));
       reviewValueBefore++;
       String reviewValueAfter = Integer.toString(reviewValueBefore);
-      newLogin.currentUserUser
+      currentUser
           .setReviewValue(userAccountPointer, reviewAccountPointer, reviewValueAfter);
       tutorValue
           .setText(
-              newLogin.currentUserUser.getReviewValue(userAccountPointer, reviewAccountPointer));
+              currentUser.getReviewValue(userAccountPointer, reviewAccountPointer));
 
       this.temp--;
       if (temp == 1) {
@@ -220,14 +220,14 @@ public class ratereviewController extends Main {
   private void rateDown(ActionEvent event) throws IOException {
     try {
       Integer reviewValueBefore = Integer.parseInt(
-          newLogin.currentUserUser.getReviewValue(userAccountPointer, reviewAccountPointer));
+          currentUser.getReviewValue(userAccountPointer, reviewAccountPointer));
       reviewValueBefore--;
       String reviewValueAfter = Integer.toString(reviewValueBefore);
-      newLogin.currentUserUser
+      currentUser
           .setReviewValue(userAccountPointer, reviewAccountPointer, reviewValueAfter);
       tutorValue
           .setText(
-              newLogin.currentUserUser.getReviewValue(userAccountPointer, reviewAccountPointer));
+              currentUser.getReviewValue(userAccountPointer, reviewAccountPointer));
       this.temp++;
       if (temp == 1) {
         RateUp.visibleProperty().setValue(Boolean.TRUE);

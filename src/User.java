@@ -438,7 +438,7 @@ public class User {
     return Attendance;
   }
 
-  //setters 
+  //setters
   public void setAppointmentDate(int UserNumber, int appointmentNumber, String AppointmentDate) {
     //this parses the users account from the constructor
     JSONArray UserAccountsIN = (JSONArray) AccountsIN.get(UserNumber);

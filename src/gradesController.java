@@ -40,12 +40,12 @@ public class gradesController extends Main {
 
   @FXML
   public void initialize() {
-    if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
+    if (currentUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
       StudentSelector.setVisible(true);
     }
-    for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-      String role = newLogin.currentUserUser.getRole(i);
-      String StudentName = newLogin.currentUserUser.getFirstName(i);
+    for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+      String role = currentUser.getRole(i);
+      String StudentName = currentUser.getFirstName(i);
       if (role.equals("Student")) {
         StudentSelector.getItems().addAll(StudentName);
       }
@@ -73,13 +73,13 @@ public class gradesController extends Main {
   @FXML
   private void update() {
     try {
-      if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
+      if (currentUser.getRole(newLogin.getUserNumber()).equals("Tutor")) {
         System.out.println("attempting update");
 
         int StudentNumber = 0;
-        for (int i = 0; i <= newLogin.currentUserUser.getTotalNumberOfAccounts() - 1; i++) {
-          String role = newLogin.currentUserUser.getRole(i);
-          String StudentName = newLogin.currentUserUser.getFirstName(i);
+        for (int i = 0; i <= currentUser.getTotalNumberOfAccounts() - 1; i++) {
+          String role = currentUser.getRole(i);
+          String StudentName = currentUser.getFirstName(i);
           if (role.equals("Student")) {
             if (StudentName.equals(StudentSelector.getValue().toString())) {
               StudentNumber = i;
@@ -95,12 +95,12 @@ public class gradesController extends Main {
           int D = 0;
           int F = 0;
           int counter = 0;
-          while (counter < newLogin.currentUserUser
+          while (counter < currentUser
               .getNumberOfAssignments(StudentNumber)) {
-            double a = Double.parseDouble(newLogin.currentUserUser
+            double a = Double.parseDouble(currentUser
                 .getAssignmentPointsReceived(StudentNumber, counter));
             double b = Double.parseDouble(
-                newLogin.currentUserUser.getAssignmentMaxPoints(StudentNumber, counter));
+                currentUser.getAssignmentMaxPoints(StudentNumber, counter));
             System.out.println(a);
             System.out.println(b);
             double Calculation = (a / b);
@@ -146,17 +146,17 @@ public class gradesController extends Main {
           int ontime = 0;
           int Absent = 0;
           int counter = 0;
-          while (counter < newLogin.currentUserUser
+          while (counter < currentUser
               .getNumberOfAppointments(StudentNumber)) {
-            if (newLogin.currentUserUser.getAppointmentAttendance(StudentNumber, counter)
+            if (currentUser.getAppointmentAttendance(StudentNumber, counter)
                 .equals("Late")) {
               Late++;
             }
-            if (newLogin.currentUserUser.getAppointmentAttendance(StudentNumber, counter)
+            if (currentUser.getAppointmentAttendance(StudentNumber, counter)
                 .equals("ontime")) {
               ontime++;
             }
-            if (newLogin.currentUserUser.getAppointmentAttendance(StudentNumber, counter)
+            if (currentUser.getAppointmentAttendance(StudentNumber, counter)
                 .equals("Absent")) {
               Absent++;
             }
@@ -181,7 +181,7 @@ public class gradesController extends Main {
       ErrorGrades.setVisible(true);
     }
     try {
-      if (newLogin.currentUserUser.getRole(newLogin.getUserNumber()).equals("Student")) {
+      if (currentUser.getRole(newLogin.getUserNumber()).equals("Student")) {
         System.out.println("attempting update");
 
         // If the combo box has "Grades" selected
@@ -192,12 +192,12 @@ public class gradesController extends Main {
           int D = 0;
           int F = 0;
           int counter = 0;
-          while (counter < newLogin.currentUserUser
+          while (counter < currentUser
               .getNumberOfAssignments(this.newLogin.getUserNumber())) {
-            double a = Double.parseDouble(newLogin.currentUserUser
+            double a = Double.parseDouble(currentUser
                 .getAssignmentPointsReceived(this.newLogin.getUserNumber(), counter));
             double b = Double.parseDouble(
-                newLogin.currentUserUser.getAssignmentMaxPoints(this.newLogin.getUserNumber(), counter));
+                currentUser.getAssignmentMaxPoints(this.newLogin.getUserNumber(), counter));
             System.out.println(a);
             System.out.println(b);
             double Calculation = (a / b);
@@ -244,17 +244,17 @@ public class gradesController extends Main {
           int Absent = 0;
           int counter = 0;
           System.out.println(this.newLogin.getUserNumber());
-          while (counter < newLogin.currentUserUser
+          while (counter < currentUser
               .getNumberOfAppointments(this.newLogin.getUserNumber())) {
-            if (newLogin.currentUserUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
+            if (currentUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
                 .equals("Late")) {
               Late++;
             }
-            if (newLogin.currentUserUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
+            if (currentUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
                 .equals("Present")) {
               ontime++;
             }
-            if (newLogin.currentUserUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
+            if (currentUser.getAppointmentAttendance(this.newLogin.getUserNumber(), counter)
                 .equals("Absent")) {
               Absent++;
             }

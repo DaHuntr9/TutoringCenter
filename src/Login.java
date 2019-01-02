@@ -39,7 +39,6 @@ public class Login {
   JSONArray AccountsIN;
   static int UserNumber;
   //these are the place holders for the construction of the current user.
-  static User currentUserUser;
   static Boolean HardCode = false;
 
   //Constructor
@@ -101,15 +100,13 @@ public class Login {
     System.out.println(this.UserNumber);
     System.out.println(returnRole(this.UserNumber));
     if (returnRole(this.UserNumber).equals("Tutor")) {
-      this.currentUserUser = new User(this.UserNumber);
-      //needs to set the User in main.
-      Main.currentUser = this.currentUserUser;
+      Main.currentUser  = new User(this.UserNumber);
     }
     if (returnRole(this.UserNumber).equals("Student")) {
       System.out.println("made object of student");
-      this.currentUserUser = new User(this.UserNumber);
+      Main.currentUser = new User(this.UserNumber);
       System.out.println("done with making said object");
-      System.out.println(this.currentUserUser.toString());
+      System.out.println("This is the Main User Object"+ Main.currentUser);
     }
     return LoginCredentials;
   }
@@ -170,9 +167,9 @@ public class Login {
     //This is to set the user objects that wil have all the information about the user,
     //through the instance.
     if (returnRole(UserNumber) == "Student") {
-      this.currentUserUser = new User (UserNumber);
+      Main.currentUser  = new User (UserNumber);
     } else if (returnRole(UserNumber) == "Tutor") {
-      this.currentUserUser = new User(UserNumber);
+      Main.currentUser  = new User(UserNumber);
     }
   }
 
